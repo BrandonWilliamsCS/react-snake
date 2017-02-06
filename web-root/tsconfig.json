@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./web-root/dist/scripts",
+        "outDir": "./dist/scripts",
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",

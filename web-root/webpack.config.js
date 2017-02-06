@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./web-root/src/scripts/index.tsx",
+    entry: "./web-root/src/scripts/SnakeGameController.tsx",
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist/scripts"
