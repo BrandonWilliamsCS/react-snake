@@ -23,7 +23,5 @@ gulp.task('nodemon', function (cb) {
 });
 
 gulp.task('build', function () {
-    spawn('npm run build', [], { shell: true, stdio: 'inherit' }).on('exit', function () {
-        browserSync.reload();
-    });
+    spawn('npm run build', [], { shell: true, stdio: 'inherit' });
 });

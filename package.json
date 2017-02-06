@@ -27,7 +27,7 @@
         "build:scripts": "webpack --config ./web-root/webpack.config.js && npm run build:scripts-plain",
         "build:scripts-plain": "tar -cf - -C ./web-root/src/scripts --exclude='*.tsx' --exclude=components . | tar -xf - -C ./web-root/dist/scripts",
         "server": "node ./node_modules/gulp/bin/gulp.js",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
