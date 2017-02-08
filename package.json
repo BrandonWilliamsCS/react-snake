@@ -1,39 +1,40 @@
 {
-    "name": "react-snake",
-    "version": "0.1.0",
-    "description": "A simple game built with React and TypeScript",
-    "main": "node-server/index.js",
-    "dependencies": {
-        "express": "^4.14.0",
-        "react": "^15.4.2",
-        "react-dom": "^15.4.2"
-    },
-    "devDependencies": {
-        "@types/react": "^15.0.2",
-        "@types/react-dom": "^0.14.21",
-        "awesome-typescript-loader": "^3.0.0-beta.18",
-        "gulp": "^3.9.1",
-        "gulp-nodemon": "^2.2.1",
-        "source-map-loader": "^0.1.6",
-        "typescript": "^2.1.5",
-        "webpack": "^1.14.0"
-    },
-    "scripts": {
-        "start": "node ./node_modules/gulp/bin/gulp.js start-watch-build",
-        "build": "npm run build:clean && npm run build:copy && npm run build:css && npm run build:scripts",
-        "build:clean": "rm -rf ./web-root/dist",
-        "build:copy": "mkdir ./web-root/dist && tar -cf - -C ./web-root/src --exclude=css --exclude=scripts . | tar -xf - -C ./web-root/dist",
-        "build:css": "mkdir ./web-root/dist/css && tar -cf - -C ./web-root/src/css --exclude=tachyons . | tar -xf - -C ./web-root/dist/css",
-        "build:scripts": "webpack --config ./web-root/webpack.config.js && npm run build:scripts-plain",
-        "build:scripts-plain": "tar -cf - -C ./web-root/src/scripts --exclude='*.tsx' --exclude=components . | tar -xf - -C ./web-root/dist/scripts",
-        "server": "node ./node_modules/gulp/bin/gulp.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/BrandonWilliamsCS/react-snake.git"
-    },
-    "private": true,
-    "license": "MIT",
-    "homepage": "https://github.com/BrandonWilliamsCS/react-snake#readme"
+  "name": "react-snake",
+  "version": "0.1.0",
+  "description": "A simple game built with React and TypeScript",
+  "main": "node-server/index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "immutable": "^3.8.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.2",
+    "@types/react-dom": "^0.14.21",
+    "awesome-typescript-loader": "^3.0.0-beta.18",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "source-map-loader": "^0.1.6",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
+  },
+  "scripts": {
+    "start": "node ./node_modules/gulp/bin/gulp.js start-watch-build",
+    "build": "npm run build:clean && npm run build:copy && npm run build:css && npm run build:scripts",
+    "build:clean": "rm -rf ./web-root/dist",
+    "build:copy": "mkdir ./web-root/dist && tar -cf - -C ./web-root/src --exclude=css --exclude=scripts . | tar -xf - -C ./web-root/dist",
+    "build:css": "mkdir ./web-root/dist/css && tar -cf - -C ./web-root/src/css --exclude=tachyons . | tar -xf - -C ./web-root/dist/css",
+    "build:scripts": "webpack --config ./web-root/webpack.config.js && npm run build:scripts-plain",
+    "build:scripts-plain": "tar -cf - -C ./web-root/src/scripts --exclude='*.tsx' --exclude=components . | tar -xf - -C ./web-root/dist/scripts",
+    "server": "node ./node_modules/gulp/bin/gulp.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandonWilliamsCS/react-snake.git"
+  },
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/BrandonWilliamsCS/react-snake#readme"
 }
