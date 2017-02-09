@@ -44,14 +44,13 @@ function handleKeyDown(evt: React.KeyboardEvent<any>): void {
     else if (evt.keyCode == DOWN_KEY_CODE || evt.key == DOWN_KEY) direction = 'down'
     else if (evt.keyCode == LEFT_KEY_CODE || evt.key == LEFT_KEY) direction = 'left'
     else if (evt.keyCode == RIGHT_KEY_CODE || evt.key == RIGHT_KEY) direction = 'right'
-
-    gameView.updateFacing(direction);
 }
 
 ReactDOM.render(
-    <SnakeGameView arenaWidth={arenaWidth}
+    <SnakeGameView
+        arenaWidth={arenaWidth}
         arenaHeight={arenaHeight}
-        facing={direction}
+        snakePath={gameModel.getSnakePath()}
         handleKeyDown={handleKeyDown}
         ref={(snakeGameView) => { gameView = snakeGameView }}/>,
     document.getElementById('gameContainer')

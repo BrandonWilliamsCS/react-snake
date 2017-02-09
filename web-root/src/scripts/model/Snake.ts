@@ -3,8 +3,8 @@ import * as Lattice from '../Lattice';
 
 export class Snake {
 
-    private bodySegments: Immutable.List<SnakeSegment>;
-    headPosition: Lattice.Cell;
+    private readonly bodySegments: Immutable.List<SnakeSegment>;
+    readonly headPosition: Lattice.Cell;
 
     constructor(initialFacing: Lattice.Direction, initialPosition: Lattice.Cell, bodySegments?: Immutable.List<SnakeSegment>) {
         // This is unideal, since it's somewhat exposing its internals
@@ -32,9 +32,9 @@ export class Snake {
         return !this.bodySegments.toSeq().filter((segment: SnakeSegment) => segment.isOccupying(cell)).isEmpty();
     }
 
-    // getPath(): Immutable.List<Lattice.PathCell> {
-    //
-    // }
+    getPath(): Lattice.Path {
+        return Immutable.List<Lattice.PathCell>([{ location: this.headPosition, entryDirection: 'right', exitDirection: 'right '}]);
+    }
 
     moved(direction: Lattice.Direction): Snake {
         if (this.bodySegments.size != 1 || this.bodySegments.first().length != 1) {

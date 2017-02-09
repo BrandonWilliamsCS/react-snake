@@ -70,3 +70,5 @@ export interface PathCell {
     readonly entryDirection: Direction;
     readonly exitDirection: Direction;
 }
+
+export type Path = Immutable.List<PathCell>

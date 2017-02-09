@@ -12,15 +12,17 @@ interface GameSettings {
 
 export class SnakeGame {
     readonly settings: GameSettings;
-    snake: Snake;
+    private snake: Snake;
     score: number = 0;
-    headPosition: Lattice.Cell;
     foodPositions: Lattice.Cell[] = [];
 
     constructor(settings: GameSettings) {
         this.settings = settings;
         this.snake = new Snake(settings.initialFacing, settings.initialPosition);
-        this.headPosition = settings.initialPosition;
+    }
+
+    getSnakePath(): Lattice.Path {
+        return this.snake.getPath();
     }
 
     // Allow for variable snake speed, increasing with score. Probably log(score) * 0.5
