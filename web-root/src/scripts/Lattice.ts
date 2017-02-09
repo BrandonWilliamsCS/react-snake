@@ -1,5 +1,12 @@
+import * as Immutable from 'immutable'
+
 // This is a "string literal" type. It's like an enum, but it's a subtype of string.
 export type Direction = 'up' | 'down' | 'left' | 'right';
+
+export interface Size {
+    width: number,
+    height: number
+}
 
 export class Cell {
     readonly x: number;
@@ -56,4 +63,10 @@ export class Cell {
     static equals(left: Cell, right: Cell): boolean {
         return left.x == right.x && left.y == right.y;
     }
+}
+
+export interface PathCell {
+    readonly location: Cell;
+    readonly entryDirection: Direction;
+    readonly exitDirection: Direction;
 }
