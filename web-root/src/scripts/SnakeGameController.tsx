@@ -46,12 +46,27 @@ function handleKeyDown(evt: React.KeyboardEvent<any>): void {
     else if (evt.keyCode == RIGHT_KEY_CODE || evt.key == RIGHT_KEY) direction = 'right'
 }
 
+function handleStartClick(evt: React.MouseEvent<any>): void {
+    gameView.startGame();
+    // TODO: variable time based on score
+    var timer = setInterval(advance, 1000);
+}
+
+var i = 0;
+function advance() {
+    if (i > 10) return; i++;
+    gameModel.advance(direction);
+    const snakePath = gameModel.getSnakePath();
+    gameView.nextFrame(snakePath, gameModel.score);
+}
+
 ReactDOM.render(
     <SnakeGameView
         arenaWidth={arenaWidth}
         arenaHeight={arenaHeight}
         snakePath={gameModel.getSnakePath()}
         handleKeyDown={handleKeyDown}
+        handleStartClick={handleStartClick}
         ref={(snakeGameView) => { gameView = snakeGameView }}/>,
     document.getElementById('gameContainer')
 );

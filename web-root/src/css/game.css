@@ -1,39 +1,61 @@
 .game {
-  background: cyan;
-  position: absolute;
-  display: flex;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    background: cyan;
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .sidebar {
-  background: linen;
-  width: 200px;
-  height: 100%;
-  position: relative;
-  box-sizing: border-box;
-  padding: 10px;
+    background: linen;
+    width: 200px;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .arena {
-  background: saddlebrown;
-  height: 100%;
-  flex-grow: 1;
-  position: relative;
-  box-sizing: border-box;
-  border: 20px solid green;
+    background: saddlebrown;
+    flex-grow: 1;
+    position: relative;
+    box-sizing: border-box;
+    border: 20px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
 }
 
 .score {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .cell {
-    border: 1px solid black;
+    position: absolute;;
+    box-sizing: border-box;
+}
+
+.cell-container {
+    position: absolute;
 }
 
 .wall {
     background-color: grey;
+    border-radius: 35%;
+    border: 1px solid black;
+}
+
+.cell img {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
 }

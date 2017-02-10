@@ -23,10 +23,10 @@ export class Cell {
         // it restricts to to the right values, and knows when you've hit every case.
         switch (direction) {
         case 'up':
-            newDimension = this.y - distance;
+            newDimension = this.y + distance;
             return new Cell(this.x, newDimension);
         case 'down':
-            newDimension = this.y + distance;
+            newDimension = this.y - distance;
             return new Cell(this.x, newDimension);
         case 'left':
             newDimension = this.x - distance;

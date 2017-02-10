@@ -33,9 +33,48 @@ export class Snake {
     }
 
     getPath(): Lattice.Path {
-        return Immutable.List<Lattice.PathCell>([{ location: this.headPosition, entryDirection: 'right', exitDirection: 'right '}]);
+        // if we just have a head, special case to simplify the main logic.
+        // This way, we're sure that no segment has a length of 1 (see grow/shrink logic)
+        if (this.bodySegments.first().length == 1) {
+            const firstSegment = this.bodySegments.first();
+            const head: Lattice.PathCell = { location: this.headPosition, entryDirection: firstSegment.growDirection, exitDirection: firstSegment.growDirection};
+            return Immutable.List<Lattice.PathCell>([head]);
+        }
+
+        // Ignore the headmost cell of every segment; that will be covered by the start of the next segment.
+        let prevExitDirection: Lattice.Direction = this.getTailFacing();
+        const withoutHead = this.bodySegments.reverse().flatMap(bodySegment => {
+            const pathCells: Lattice.PathCell[] = [];
+            if (bodySegment) {
+                console.log('---------------------Processing: (' + bodySegment.startCell.x + ',' + bodySegment.startCell.y + ')/' + bodySegment.length + '/' + bodySegment.growDirection);
+                for (let i = 0; i < bodySegment.length - 1; ++i) {
+                    pathCells.push({
+                        location: bodySegment.getNth(i),
+                        entryDirection: i == 0 ? prevExitDirection : bodySegment.growDirection,
+                        exitDirection: bodySegment.growDirection
+                    });
+                }
+                prevExitDirection = bodySegment.growDirection;
+            }
+            return Immutable.List(pathCells);
+        });
+
+        // now that we have all but the first cell of the first segment, add that.
+        const lastSegment = this.bodySegments.first();
+        const headCell: Lattice.PathCell = {
+            location: lastSegment.endCell,
+            entryDirection: lastSegment.growDirection,
+            exitDirection: lastSegment.growDirection
+        };
+        const fullPath = withoutHead.concat(headCell).reverse();
+        console.log('Snake ');
+        fullPath.forEach(cell => {;
+            cell && console.log('  Segment: ' + cell.entryDirection + ' - (' + cell.location.x + ', ' + cell.location.y + ') - '+ cell.exitDirection);
+        });
+        return Immutable.List<Lattice.PathCell>(fullPath);
     }
 
+    // TODO: shouldn't need? May need to fix grown/shrunken
     moved(direction: Lattice.Direction): Snake {
         if (this.bodySegments.size != 1 || this.bodySegments.first().length != 1) {
             throw new Error('Can\'t move non-trivial snake body.');
@@ -60,7 +99,7 @@ export class Snake {
     shrunken() {
         // get rid of the tail-most segment if it's obsolete, but otherwise replace.
         let newBodySegments: Immutable.List<SnakeSegment>;
-        if (this.bodySegments.size > 0 && this.bodySegments.last().length == 1) {
+        if (this.bodySegments.size > 1 && this.bodySegments.last().length == 1) {
             newBodySegments = this.bodySegments.pop();
         } else {
             newBodySegments = this.bodySegments.update(-1,
@@ -82,7 +121,7 @@ class SnakeSegment {
         this.length = length;
         this.growDirection = growDirection;
         this.startCell = startCell;
-        this.endCell = startCell.located(growDirection, length);
+        this.endCell = startCell.located(growDirection, length - 1);
     }
 
     isOccupying(cell: Lattice.Cell): boolean {
@@ -96,6 +135,10 @@ class SnakeSegment {
             case 'left':
                 return this.startCell.y == cell.y && this.startCell.x >= cell.x && cell.x >= this.endCell.x
         }
+    }
+
+    getNth(n: number): Lattice.Cell {
+        return this.startCell.located(this.growDirection, n);
     }
 
     grown(): SnakeSegment {

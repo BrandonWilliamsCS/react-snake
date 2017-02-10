@@ -21,6 +21,12 @@ export class SnakeGame {
         this.snake = new Snake(settings.initialFacing, settings.initialPosition);
     }
 
+    advance(direction: Lattice.Direction) {
+        console.log('advancing: ' + direction);
+        this.snake = this.snake.grown(direction);
+        // TODO: check for food
+    }
+
     getSnakePath(): Lattice.Path {
         return this.snake.getPath();
     }
