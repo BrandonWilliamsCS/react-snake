@@ -54,8 +54,9 @@ function handleStartClick(evt: React.MouseEvent<any>): void {
 
 var i = 0;
 function advance() {
-    if (i > 10) return; i++;
-    gameModel.advance(direction);
+    //if (i > 10) return;
+    i++;
+    gameModel.advance(direction, i);
     const snakePath = gameModel.getSnakePath();
     gameView.nextFrame(snakePath, gameModel.score);
 }

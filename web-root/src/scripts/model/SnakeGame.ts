@@ -21,10 +21,11 @@ export class SnakeGame {
         this.snake = new Snake(settings.initialFacing, settings.initialPosition);
     }
 
-    advance(direction: Lattice.Direction) {
-        console.log('advancing: ' + direction);
+    advance(direction: Lattice.Direction, tmp: number) {
         this.snake = this.snake.grown(direction);
         // TODO: check for food
+        //if (tmp > 5)
+            this.snake = this.snake.shrunken();
     }
 
     getSnakePath(): Lattice.Path {

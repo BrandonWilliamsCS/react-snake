@@ -30,6 +30,7 @@ export class Snake extends React.Component<SnakeProps, undefined> {
                         // but is also smart enough to know that within the tag. Like Swift "if let pathCell = pathCell"
                         (i > 0 && i < this.props.snake.size -1 && pathCell) &&
                         <SnakeBodyCell
+                            key={1000 * pathCell.location.x + pathCell.location.y}
                             size={this.props.cellSize}
                             pathCell={pathCell}/>
                     )}

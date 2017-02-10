@@ -35,11 +35,11 @@ export class Snake {
     getPath(): Lattice.Path {
         // if we just have a head, special case to simplify the main logic.
         // This way, we're sure that no segment has a length of 1 (see grow/shrink logic)
-        if (this.bodySegments.first().length == 1) {
-            const firstSegment = this.bodySegments.first();
-            const head: Lattice.PathCell = { location: this.headPosition, entryDirection: firstSegment.growDirection, exitDirection: firstSegment.growDirection};
-            return Immutable.List<Lattice.PathCell>([head]);
-        }
+        // if (this.bodySegments.first().length == 1) {
+        //     const firstSegment = this.bodySegments.first();
+        //     const head: Lattice.PathCell = { location: this.headPosition, entryDirection: firstSegment.growDirection, exitDirection: firstSegment.growDirection};
+        //     return Immutable.List<Lattice.PathCell>([head]);
+        // }
 
         // Ignore the headmost cell of every segment; that will be covered by the start of the next segment.
         let prevExitDirection: Lattice.Direction = this.getTailFacing();
@@ -97,14 +97,12 @@ export class Snake {
     }
 
     shrunken() {
-        // get rid of the tail-most segment if it's obsolete, but otherwise replace.
-        let newBodySegments: Immutable.List<SnakeSegment>;
+        // get rid of the tail-most segment if it's obsolete, and shink whatever the new tail is.
+        let newBodySegments: Immutable.List<SnakeSegment> = this.bodySegments;
         if (this.bodySegments.size > 1 && this.bodySegments.last().length == 1) {
-            newBodySegments = this.bodySegments.pop();
-        } else {
-            newBodySegments = this.bodySegments.update(-1,
-                tail => new SnakeSegment(tail.startCell, tail.growDirection, tail.length - 1));
+            newBodySegments = newBodySegments.pop();
         }
+        newBodySegments = newBodySegments.update(-1, tail => tail.shrunken());
         // up is ignored in the constructor since the body segments are provided. In a real product, we'd fix that.
         return new Snake('up', this.headPosition, newBodySegments);
     }
@@ -146,6 +144,6 @@ class SnakeSegment {
     }
 
     shrunken(): SnakeSegment {
-        return new SnakeSegment(this.startCell, this.growDirection, this.length - 1);
+        return new SnakeSegment(this.startCell.located(this.growDirection), this.growDirection, this.length - 1);
     }
 }
