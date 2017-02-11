@@ -16,9 +16,6 @@ export class Snake extends React.Component<SnakeProps, undefined> {
     render(): JSX.Element {
         const tailPathCell = this.props.snake.last();
         return (<div className="snake cell-container" style={{ height: this.props.cellSize, width: this.props.cellSize}}>
-                    <SnakeHeadCell
-                        size={this.props.cellSize}
-                        pathCell={this.props.snake.first()}/>
                     {/* JSX allows any expression within {}. This then leverages js short-circuiting "&&". */}
                     {this.props.snake.size > 1 &&
                         <SnakeTailCell
@@ -34,6 +31,9 @@ export class Snake extends React.Component<SnakeProps, undefined> {
                             size={this.props.cellSize}
                             pathCell={pathCell}/>
                     )}
+                    <SnakeHeadCell
+                        size={this.props.cellSize}
+                        pathCell={this.props.snake.first()}/>
                 </div>);
     }
 }

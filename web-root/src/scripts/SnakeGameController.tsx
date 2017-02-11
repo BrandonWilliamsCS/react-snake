@@ -46,19 +46,27 @@ function handleKeyDown(evt: React.KeyboardEvent<any>): void {
     else if (evt.keyCode == RIGHT_KEY_CODE || evt.key == RIGHT_KEY) direction = 'right'
 }
 
+var timer;
 function handleStartClick(evt: React.MouseEvent<any>): void {
+    gameModel.reset();
     gameView.startGame();
-    // TODO: variable time based on score
-    var timer = setInterval(advance, 1000);
+    timer = setTimeout(advance, 1000 * gameModel.getTickLength());
 }
 
-var i = 0;
 function advance() {
-    //if (i > 10) return;
-    i++;
-    gameModel.advance(direction, i);
+    gameModel.advance(direction);
     const snakePath = gameModel.getSnakePath();
     gameView.nextFrame(snakePath, gameModel.score);
+    // if the game is done, skip further processing.
+    if (gameModel.gameOver) {
+        gameView.endGame();
+        return;
+    }
+    timer = setTimeout(advance, 1000 * gameModel.getTickLength());
+}
+
+function fakeServerCall(): Lattice.Cell[] {
+    return gameModel.foodPositions;
 }
 
 ReactDOM.render(
@@ -68,6 +76,7 @@ ReactDOM.render(
         snakePath={gameModel.getSnakePath()}
         handleKeyDown={handleKeyDown}
         handleStartClick={handleStartClick}
+        foodResource={fakeServerCall}
         ref={(snakeGameView) => { gameView = snakeGameView }}/>,
     document.getElementById('gameContainer')
 );
