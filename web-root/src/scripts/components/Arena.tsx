@@ -16,9 +16,9 @@ export interface ArenaProps {
 export class Arena extends React.Component<ArenaProps, undefined> {
 
     render(): JSX.Element {
-        var gridHeight = '(100vh - 50px)';
-        var gridWidth = 'calc(' + gridHeight + ' * ' + (this.props.width + 2) + ' / ' + (this.props.height + 2) + ')';
-        var cellSize = 'calc(' + gridHeight + ' / ' + (this.props.height + 2) + ')';
+        let gridHeight = '(100vh - 50px)';
+        const gridWidth = 'calc(' + gridHeight + ' * ' + (this.props.width + 2) + ' / ' + (this.props.height + 2) + ')';
+        const cellSize = 'calc(' + gridHeight + ' / ' + (this.props.height + 2) + ')';
         gridHeight = 'calc(' + gridHeight + ')';
         return (
             <div className="arena">

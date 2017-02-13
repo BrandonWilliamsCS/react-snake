@@ -24,6 +24,7 @@ export class SnakeGame {
 
     reset() {
         this.snake = new Snake(this.settings.initialFacing, this.settings.initialPosition);
+        this.gameOver = false;
         this.generateFood();
     }
 
@@ -43,7 +44,10 @@ export class SnakeGame {
     }
 
     generateFood() {
-        this.foodPositions.push(this.getRandomEmptyCell());
+        // allow multiple seeds by calculating this number
+        while (this.foodPositions.length < 1) {
+            this.foodPositions.push(this.getRandomEmptyCell());
+        }
     }
 
     getRandomEmptyCell(): Lattice.Cell {

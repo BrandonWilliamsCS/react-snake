@@ -40,17 +40,17 @@ export class SnakeGame extends React.Component<SnakeGameProps, SnakeGameState> {
     }
 
     startGame() {
-        this.setState({ started: true, score: 0, snakePath: this.state.snakePath, gameOver: false });
+        this.setState({ started: true, score: 0, snakePath: this.props.snakePath, gameOver: false });
         this.element.focus();
     }
 
     endGame() {
-        this.setState({ ...this.state, gameOver: true });
+        this.setState({ gameOver: true });
     }
 
     nextFrame(snakePath: Lattice.Path, score: number) {
         // The typescript "spread" operator; this means take all of this.state, then change score/snakePath
-        this.setState({ ...this.state, score: score, snakePath: snakePath });
+        this.setState({ score: score, snakePath: snakePath });
     }
 
     render(): JSX.Element {

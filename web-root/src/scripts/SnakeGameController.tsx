@@ -48,6 +48,7 @@ function handleKeyDown(evt: React.KeyboardEvent<any>): void {
 
 var timer;
 function handleStartClick(evt: React.MouseEvent<any>): void {
+    direction = 'right';
     gameModel.reset();
     gameView.startGame();
     timer = setTimeout(advance, 1000 * gameModel.getTickLength());
