@@ -62,9 +62,14 @@ export class SnakeGame extends React.Component<SnakeGameProps, SnakeGameState> {
                     {this.state.started
                         ? (<span className="score">Eaten: {this.state.score} pellets</span>)
                         : (<button type="button" onClick={this.props.handleStartClick}>Start!</button>)}
+                    {this.state.gameOver && <br/>}
+                    {this.state.gameOver &&
+                        <button type="button" onClick={this.props.handleStartClick}>Restart</button>
+                    }
                 </div>
                 <Arena width={this.props.arenaWidth} height={this.props.arenaHeight}
                         snake={this.state.snakePath} foodResource={this.props.foodResource}/>
+                {this.state.gameOver && <br/>}
             </div>
         );
     }
