@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import * as Lattice from '../Lattice';
 
-import { FoodCell } from './FoodCell';
+import { CellContainer } from './CellContainer';
+import { SimpleCell } from './SimpleCell';
 
 export interface FoodControllerProps {
     foodResource: () => Lattice.Cell[],
@@ -34,13 +35,14 @@ export class FoodController extends React.Component<FoodControllerProps, FoodCon
     }
 
     render(): JSX.Element {
-        return (<div className="foods cell-container" style={{ height: this.props.cellSize, width: this.props.cellSize}}>
+        return (<CellContainer cellSize={this.props.cellSize}>
                     {this.state.foodPositions.map(foodPosition =>
-                        <FoodCell
+                        <SimpleCell
                             key={1000 * foodPosition.x + foodPosition.y}
-                            size={this.props.cellSize}
+                            additionalClasses="food"
+                            url="img/food.png"
                             location={foodPosition}/>
                     )}
-                </div>);
+                </CellContainer>);
     }
 }

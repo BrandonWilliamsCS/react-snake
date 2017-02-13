@@ -25,6 +25,7 @@ export class SnakeGame {
     reset() {
         this.snake = new Snake(this.settings.initialFacing, this.settings.initialPosition);
         this.gameOver = false;
+        this.score = 0;
         this.generateFood();
     }
 

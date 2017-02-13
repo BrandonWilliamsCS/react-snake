@@ -4,14 +4,15 @@ import * as Lattice from '../Lattice';
 
 import { Cell, CellProps } from './Cell';
 
-export interface FoodCellProps extends CellProps {
+export interface SimpleCellProps extends CellProps {
+    url: string,
     location: Lattice.Cell
 }
 
-export abstract class FoodCell extends Cell<FoodCellProps> {
+export abstract class SimpleCell extends Cell<SimpleCellProps> {
 
     protected getImageUrl(): string {
-        return 'img/food.png';
+        return this.props.url;
     }
 
     protected get latticePosition(): Lattice.Cell {
