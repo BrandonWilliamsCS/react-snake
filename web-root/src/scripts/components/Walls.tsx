@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+import * as Lattice from '../Lattice';
+
+import { Wall } from './Wall';
+
 export interface WallProps {
     width: number,
     height: number,
@@ -14,38 +18,30 @@ export class Walls extends React.Component<WallProps, undefined> {
     }
 
     render(): JSX.Element {
-        function toPercent(value: number): string {
-            return value + '00%';
-        }
-
         return (<div className="walls cell-container" style={{ height: this.props.cellSize, width: this.props.cellSize}}>
             {Array(this.props.width).fill(1).map((el, i) =>
-                <div
-                    className="cell wall"
+                <Wall
                     key={1000 * i}
-                    style={{ height: this.props.cellSize, width: this.props.cellSize, left: toPercent(i), bottom: 0}}>
-                </div>
+                    location={new Lattice.Cell(i, 0)}>
+                </Wall>
             )}
             {Array(this.props.width).fill(1).map((el, i) =>
-                <div
-                    className="cell wall"
+                <Wall
                     key={1000 * i + this.props.height}
-                    style={{ height: this.props.cellSize, width: this.props.cellSize, left: toPercent(i), bottom: toPercent(this.props.height - 1)}}>
-                </div>
+                    location={new Lattice.Cell(i, this.props.height - 1)}>
+                </Wall>
             )}
             {Array(this.props.height - 2).fill(1).map((el, j) =>
-                <div
-                    className="cell wall"
+                <Wall
                     key={j}
-                    style={{ height: this.props.cellSize, width: this.props.cellSize, left: 0, bottom: toPercent(j + 1)}}>
-                </div>
+                    location={new Lattice.Cell(0, j + 1)}>
+                </Wall>
             )}
             {Array(this.props.height - 2).fill(1).map((el, j) =>
-                <div
-                    className="cell wall"
+                <Wall
                     key={1000 * this.props.width + j}
-                    style={{ height: this.props.cellSize, width: this.props.cellSize, left: toPercent(this.props.width - 1), bottom: toPercent(j + 1)}}>
-                </div>
+                    location={new Lattice.Cell(this.props.width - 1, j + 1)}>
+                </Wall>
             )}
         </div>);
     }
