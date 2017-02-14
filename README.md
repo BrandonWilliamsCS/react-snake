@@ -12,4 +12,4 @@ then
 npm start
 ```
 
-Once that finishes, navigate to http://localhost:8080/snake.html in a browser
+Once that finishes, navigate to http://localhost:8080/snake.html in Chrome.
