@@ -2,8 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import * as Lattice from './Lattice';
+
 import { SnakeGame } from './model/SnakeGame';
-// Because someone foolishly named both types "Snake Game", we can/have to change what we call the second one.
+// Because someone foolishly named both types "SnakeGame", we can/have to change what we call the second one.
 import { SnakeGame as SnakeGameView } from './components/SnakeGame';
 
 // As these aren't being exported, they're not going to clutter up a "global" "namespace".
@@ -18,7 +19,7 @@ const RIGHT_KEY = 'd';
 const DOWN_KEY = 's';
 
 // Game configuration -
-// Note the type inference (number, number, Lattice.Cell)
+// Note the type inference (number, number, number, Lattice.Cell)
 const arenaWidth = 12;
 const arenaHeight = 10;
 const initialTickLength = 0.5;
@@ -27,7 +28,7 @@ const start = new Lattice.Cell(2, 2);
 // Explicit type declaration here to ensure that only a Lattice.Direction string can be assigned.
 var direction: Lattice.Direction = 'right';
 // here, though, we don't need to import SnakeGame.GameSettings.
-// Both that and the arenaSize have their types inferred (and still checked).
+// Both that and the arenaSize have their types inferred (and they are still checked).
 const settings = {
     arenaSize: { width: arenaWidth, height: arenaHeight },
     initialFacing: direction,

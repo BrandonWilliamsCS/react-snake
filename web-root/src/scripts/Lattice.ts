@@ -4,18 +4,14 @@ import * as Immutable from 'immutable'
 export type Direction = 'up' | 'down' | 'left' | 'right';
 
 export interface Size {
-    width: number,
-    height: number
+    readonly width: number,
+    readonly height: number
 }
 
 export class Cell {
-    readonly x: number;
-    readonly y: number;
 
-    constructor (x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    }
+    // automatically declare and set readonly properties for x and y
+    constructor (readonly x: number, readonly y: number) { }
 
     located(direction: Direction, distance: number = 1): Cell {
         let newDimension: number;
@@ -72,3 +68,7 @@ export interface PathCell {
 }
 
 export type Path = Immutable.List<PathCell>
+
+// type intersection example: This would fail, because Cell doesn't satisfy the "Size" requirement.
+// let rectangle: Cell & Size;
+// rectangle = new Cell(0, 0);

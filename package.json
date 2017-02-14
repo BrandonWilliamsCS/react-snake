@@ -20,7 +20,7 @@
     "webpack": "^1.14.0"
   },
   "scripts": {
-    "start": "node ./node_modules/gulp/bin/gulp.js start-watch-build",
+    "start": "npm run build && node ./node_modules/gulp/bin/gulp.js start-watch-build",
     "build": "npm run build:clean && npm run build:copy && npm run build:css && npm run build:scripts",
     "build:clean": "rm -rf ./web-root/dist",
     "build:copy": "mkdir ./web-root/dist && tar -cf - -C ./web-root/src --exclude=css --exclude=scripts . | tar -xf - -C ./web-root/dist",
