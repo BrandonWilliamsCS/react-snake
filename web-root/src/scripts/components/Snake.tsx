@@ -12,7 +12,7 @@ export interface SnakeProps {
     cellSize: string
 }
 
-export class Snake extends React.Component<SnakeProps, undefined> {
+export class Snake extends React.PureComponent<SnakeProps, undefined> {
 
     render(): JSX.Element {
         const tailPathCell = this.props.snake.last();

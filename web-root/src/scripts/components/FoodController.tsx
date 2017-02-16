@@ -14,7 +14,7 @@ export interface FoodControllerState {
     foodPositions: Lattice.Cell[]
 }
 
-export class FoodController extends React.Component<FoodControllerProps, FoodControllerState> {
+export class FoodController extends React.PureComponent<FoodControllerProps, FoodControllerState> {
 
     constructor(props: FoodControllerProps) {
         super(props);
@@ -22,6 +22,7 @@ export class FoodController extends React.Component<FoodControllerProps, FoodCon
         const foodPositions = props.foodResource();
         this.state = { foodPositions: foodPositions };
         // simulate logic for checking for updates on the server, only re-rendering afterward.
+        // This is hideous and shouldn't happen in real code
         setInterval(() => {
             const newFood = props.foodResource();
             if (this.checkForUpdate(newFood)) {
@@ -35,14 +36,25 @@ export class FoodController extends React.Component<FoodControllerProps, FoodCon
     }
 
     render(): JSX.Element {
-        return (<CellContainer cellSize={this.props.cellSize}>
-                    {this.state.foodPositions.map(foodPosition =>
-                        <SimpleCell
-                            key={1000 * foodPosition.x + foodPosition.y}
-                            additionalClasses="food"
-                            url="img/food.png"
-                            location={foodPosition}/>
-                    )}
-                </CellContainer>);
+        return (<Foods cellSize={this.props.cellSize} foodPositions={this.state.foodPositions} />);
     }
+}
+
+interface FoodsProps {
+    foodPositions: Lattice.Cell[],
+    cellSize: string
+}
+
+function Foods(props: FoodsProps): JSX.Element {
+    return (
+        <CellContainer cellSize={props.cellSize}>
+            {props.foodPositions.map(foodPosition =>
+                <SimpleCell
+                    key={1000 * foodPosition.x + foodPosition.y}
+                    additionalClasses="food"
+                    url="img/food.png"
+                    location={foodPosition}/>
+            )}
+        </CellContainer>
+    );
 }

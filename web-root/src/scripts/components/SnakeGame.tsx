@@ -28,14 +28,10 @@ export class SnakeGame extends React.Component<SnakeGameProps, SnakeGameState> {
     constructor(props: SnakeGameProps) {
         super(props);
         this.state = { started: false, score: 0, snakePath: props.snakePath, gameOver: false };
-
-        // bind things here so "this" works properly
-        this.startGame = this.startGame.bind(this);
-        this.nextFrame = this.nextFrame.bind(this);
     }
 
     componentDidUpdate() {
-        if(this.state.started)
+        if (this.state.started)
             this.element.focus();
     }
 
@@ -58,9 +54,9 @@ export class SnakeGame extends React.Component<SnakeGameProps, SnakeGameState> {
             <div className="game" tabIndex={0} onKeyDown={this.props.handleKeyDown} ref={(game) => this.element = game}>
                 <div className="sidebar">
                     <h1>Snake</h1>
-                    Eat the pellets.<br/>
+                    Eat the seeds.<br/>
                     {this.state.started
-                        ? (<span className="score">Eaten: {this.state.score} pellets</span>)
+                        ? (<span className="score">Eaten: {this.state.score} seeds</span>)
                         : (<button type="button" onClick={this.props.handleStartClick}>Start!</button>)}
                     {this.state.gameOver && <br/>}
                     {this.state.gameOver &&

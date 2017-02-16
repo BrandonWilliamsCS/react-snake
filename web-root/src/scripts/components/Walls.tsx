@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import * as Lattice from '../Lattice';
 
+import { CellContainer } from './CellContainer';
 import { Wall } from './Wall';
 
 export interface WallProps {
@@ -18,31 +19,33 @@ export class Walls extends React.Component<WallProps, undefined> {
     }
 
     render(): JSX.Element {
-        return (<div className="walls cell-container" style={{ height: this.props.cellSize, width: this.props.cellSize}}>
-            {Array(this.props.width).fill(1).map((el, i) =>
-                <Wall
-                    key={1000 * i}
-                    location={new Lattice.Cell(i, 0)}>
-                </Wall>
-            )}
-            {Array(this.props.width).fill(1).map((el, i) =>
-                <Wall
-                    key={1000 * i + this.props.height}
-                    location={new Lattice.Cell(i, this.props.height - 1)}>
-                </Wall>
-            )}
-            {Array(this.props.height - 2).fill(1).map((el, j) =>
-                <Wall
-                    key={j}
-                    location={new Lattice.Cell(0, j + 1)}>
-                </Wall>
-            )}
-            {Array(this.props.height - 2).fill(1).map((el, j) =>
-                <Wall
-                    key={1000 * this.props.width + j}
-                    location={new Lattice.Cell(this.props.width - 1, j + 1)}>
-                </Wall>
-            )}
-        </div>);
+        return (
+            <CellContainer cellSize={this.props.cellSize}>
+                {Array(this.props.width).fill(1).map((el, i) =>
+                    <Wall
+                        key={1000 * i}
+                        location={new Lattice.Cell(i, 0)}>
+                    </Wall>
+                )}
+                {Array(this.props.width).fill(1).map((el, i) =>
+                    <Wall
+                        key={1000 * i + this.props.height}
+                        location={new Lattice.Cell(i, this.props.height - 1)}>
+                    </Wall>
+                )}
+                {Array(this.props.height - 2).fill(1).map((el, j) =>
+                    <Wall
+                        key={j}
+                        location={new Lattice.Cell(0, j + 1)}>
+                    </Wall>
+                )}
+                {Array(this.props.height - 2).fill(1).map((el, j) =>
+                    <Wall
+                        key={1000 * this.props.width + j}
+                        location={new Lattice.Cell(this.props.width - 1, j + 1)}>
+                    </Wall>
+                )}
+            </CellContainer>
+        );
     }
 }

@@ -53,7 +53,7 @@ export class SnakeGame {
 
     getRandomEmptyCell(): Lattice.Cell {
         let position = this.snake.headPosition;
-        while (this.snake.isOccupying(position))
+        while (this.snake.isOccupying(position)) // TODO: make sure there isn't already food here.
         {
             let x = Math.floor(Math.random() * this.settings.arenaSize.width);
             let y = Math.floor(Math.random() * this.settings.arenaSize.height);

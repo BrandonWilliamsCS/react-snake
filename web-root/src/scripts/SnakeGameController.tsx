@@ -5,7 +5,7 @@ import * as Lattice from './Lattice';
 
 import { SnakeGame } from './model/SnakeGame';
 // Because someone foolishly named both types "SnakeGame", we can/have to change what we call the second one.
-import { SnakeGame as SnakeGameView } from './components/SnakeGame';
+import { SnakeGame as SnakeGameView, SnakeGameProps } from './components/SnakeGame';
 
 // As these aren't being exported, they're not going to clutter up a "global" "namespace".
 // Alternatively, we may want to look into adding them to a utils file for keyboard input, etc.
@@ -29,6 +29,7 @@ const start = new Lattice.Cell(2, 2);
 var direction: Lattice.Direction = 'right';
 // here, though, we don't need to import SnakeGame.GameSettings.
 // Both that and the arenaSize have their types inferred (and they are still checked).
+// Note that, although Size is readonly, this implicit implementation can still modify width/height. SnakeGame can't.
 const settings = {
     arenaSize: { width: arenaWidth, height: arenaHeight },
     initialFacing: direction,
@@ -71,14 +72,18 @@ function fakeServerCall(): Lattice.Cell[] {
     return gameModel.foodPositions;
 }
 
+const gameViewProps: SnakeGameProps = {
+    arenaWidth: arenaWidth,
+    arenaHeight: arenaHeight,
+    snakePath: gameModel.getSnakePath(),
+    handleKeyDown: handleKeyDown,
+    handleStartClick: handleStartClick,
+    foodResource: fakeServerCall
+}
+
 ReactDOM.render(
     <SnakeGameView
-        arenaWidth={arenaWidth}
-        arenaHeight={arenaHeight}
-        snakePath={gameModel.getSnakePath()}
-        handleKeyDown={handleKeyDown}
-        handleStartClick={handleStartClick}
-        foodResource={fakeServerCall}
+        {...gameViewProps}
         ref={(snakeGameView) => { gameView = snakeGameView }}/>,
     document.getElementById('gameContainer')
 );

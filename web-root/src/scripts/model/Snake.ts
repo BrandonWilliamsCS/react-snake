@@ -88,15 +88,9 @@ export class Snake {
 
 class SnakeSegment {
 
-    readonly startCell: Lattice.Cell;
     readonly endCell: Lattice.Cell;
-    readonly growDirection: Lattice.Direction;
-    readonly length: number;
 
-    constructor(startCell: Lattice.Cell, growDirection: Lattice.Direction, length: number = 1) {
-        this.length = length;
-        this.growDirection = growDirection;
-        this.startCell = startCell;
+    constructor(readonly startCell: Lattice.Cell, readonly growDirection: Lattice.Direction, readonly length: number = 1) {
         this.endCell = startCell.located(growDirection, length - 1);
     }
 

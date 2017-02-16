@@ -13,7 +13,7 @@ export interface ArenaProps {
     foodResource: () => Lattice.Cell[]
 }
 
-export class Arena extends React.Component<ArenaProps, undefined> {
+export class Arena extends React.PureComponent<ArenaProps, undefined> {
 
     render(): JSX.Element {
         let gridHeight = '(100vh - 50px)';
