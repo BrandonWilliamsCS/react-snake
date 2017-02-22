@@ -16,23 +16,34 @@ export interface FoodControllerState {
 
 export class FoodController extends React.PureComponent<FoodControllerProps, FoodControllerState> {
 
+    timer: any;
+
     constructor(props: FoodControllerProps) {
         super(props);
 
         const foodPositions = props.foodResource();
-        this.state = { foodPositions: foodPositions };
+        this.state = { foodPositions: foodPositions.slice() };
+    }
+
+    componentDidMount() {
         // simulate logic for checking for updates on the server, only re-rendering afterward.
         // This is hideous and shouldn't happen in real code
-        setInterval(() => {
-            const newFood = props.foodResource();
-            if (this.checkForUpdate(newFood)) {
-                this.setState({ foodPositions: props.foodResource() });
+        // Because we're changing state, we must wait for component mount rather than just object construction.
+        this.timer = setInterval(() => {
+            const newFood = this.props.foodResource();
+            const oldFood = this.state.foodPositions;
+            if (this.checkForUpdate(newFood, oldFood)) {
+                this.setState({ foodPositions: newFood.slice() });
             }
         }, 100);
     }
 
-    private checkForUpdate(newFood: Lattice.Cell[]): boolean {
-        return JSON.stringify(newFood) !== JSON.stringify(this.state.foodPositions);
+    componentDidUnmount() {
+        clearInterval(this.timer);
+    }
+
+    private checkForUpdate(newFood: Lattice.Cell[], oldFood: Lattice.Cell[]): boolean {
+        return JSON.stringify(newFood) !== JSON.stringify(oldFood);
     }
 
     render(): JSX.Element {
