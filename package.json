@@ -21,11 +21,10 @@
   },
   "scripts": {
     "start": "npm run build && node ./node_modules/gulp/bin/gulp.js start-watch-build",
-    "build": "npm run build:clean && npm run build:copy && npm run build:css && npm run build:scripts",
-    "build:clean": "rm -rf ./web-root/dist",
-    "build:copy": "mkdir ./web-root/dist && tar -cf - -C ./web-root/src --exclude=css --exclude=scripts . | tar -xf - -C ./web-root/dist",
-    "build:css": "mkdir ./web-root/dist/css && tar -cf - -C ./web-root/src/css --exclude=tachyons . | tar -xf - -C ./web-root/dist/css",
-    "build:scripts": "webpack --config ./web-root/webpack.config.js && npm run build:scripts-plain",
+    "build": "npm run build:clean && npm run build:copy && npm run build:scripts",
+    "build:clean": "rmdir /s /q .\\web-root\\dist",
+    "build:copy": "mkdir .\\web-root\\dist && (robocopy .\\web-root\\src .\\web-root\\dist /s /e) ^& IF %ERRORLEVEL% LEQ 1 exit 0 && rmdir /q /s .\\web-root\\dist\\scripts",
+    "build:scripts": "webpack --config .\\web-root\\webpack.config.js",
     "build:scripts-plain": "tar -cf - -C ./web-root/src/scripts --exclude='*.tsx' --exclude=components . | tar -xf - -C ./web-root/dist/scripts",
     "server": "node ./node_modules/gulp/bin/gulp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
