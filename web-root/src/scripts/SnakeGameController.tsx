@@ -84,6 +84,6 @@ const gameViewProps: SnakeGameProps = {
 ReactDOM.render(
     <SnakeGameView
         {...gameViewProps}
-        ref={(snakeGameView) => { gameView = snakeGameView }}/>,
+        ref={(snakeGameView) => { gameView = snakeGameView! }}/>,
     document.getElementById('gameContainer')
 );

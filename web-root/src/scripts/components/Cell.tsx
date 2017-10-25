@@ -6,7 +6,7 @@ export interface CellProps {
     additionalClasses?: string
 }
 
-export abstract class Cell<P extends CellProps> extends React.Component<P, undefined> {
+export abstract class Cell<P extends CellProps> extends React.Component<P, {}> {
 
     protected abstract getImageUrl(): string;
     protected readonly abstract latticePosition: Lattice.Cell;

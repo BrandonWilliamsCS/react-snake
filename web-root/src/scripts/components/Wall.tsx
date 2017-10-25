@@ -6,7 +6,7 @@ export interface WallProps {
     location: Lattice.Cell
 }
 
-export abstract class Wall extends React.Component<WallProps, undefined> {
+export abstract class Wall extends React.Component<WallProps, {}> {
 
     render(): JSX.Element {
         function toPercent(value: number): string {

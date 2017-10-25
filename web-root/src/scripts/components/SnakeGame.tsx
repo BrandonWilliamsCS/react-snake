@@ -51,7 +51,7 @@ export class SnakeGame extends React.Component<SnakeGameProps, SnakeGameState> {
 
     render(): JSX.Element {
         return (
-            <div className="game" tabIndex={0} onKeyDown={this.props.handleKeyDown} ref={(game) => this.element = game}>
+            <div className="game" tabIndex={0} onKeyDown={this.props.handleKeyDown} ref={(game) => this.element = game!}>
                 <div className="sidebar">
                     <h1>Snake</h1>
                     Eat the seeds.<br/>

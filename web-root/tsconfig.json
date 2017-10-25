@@ -9,6 +9,7 @@
         "jsx": "react"
     },
     "include": [
-        "./web-root/src/scripts/**/*"
+        "./src/scripts/**/*",
+        "./src/scripts/*"
     ]
 }

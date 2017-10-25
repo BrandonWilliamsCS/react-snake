@@ -6,7 +6,7 @@ export interface CellContainerProps {
     cellSize: string
 }
 
-export class CellContainer extends React.Component<CellContainerProps, undefined> {
+export class CellContainer extends React.Component<CellContainerProps, {}> {
 
     render(): JSX.Element {
         return (<div className="cell-container" style={{ height: this.props.cellSize, width: this.props.cellSize}}>

@@ -12,7 +12,7 @@ export interface SnakeProps {
     cellSize: string
 }
 
-export class Snake extends React.PureComponent<SnakeProps, undefined> {
+export class Snake extends React.PureComponent<SnakeProps, {}> {
 
     render(): JSX.Element {
         const tailPathCell = this.props.snake.last();
@@ -25,7 +25,7 @@ export class Snake extends React.PureComponent<SnakeProps, undefined> {
                     {this.props.snake.size > 2 && this.props.snake.map((pathCell, i) => {
                         // pathCell has type "PathCell | undefined". TS requires this not-undefined check,
                         // but is also smart enough to know that within the tag. Like Swift "if let pathCell = pathCell"
-                        if (i > 0 && i < this.props.snake.size -1 && pathCell) {
+                        if (i && i > 0 && i < this.props.snake.size -1 && pathCell) {
                             return <SnakeBodyCell
                                     key={1000 * pathCell.location.x + pathCell.location.y}
                                     pathCell={pathCell}/>

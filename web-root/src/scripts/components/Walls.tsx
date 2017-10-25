@@ -11,7 +11,7 @@ export interface WallProps {
     cellSize: string
 }
 
-export class Walls extends React.Component<WallProps, undefined> {
+export class Walls extends React.Component<WallProps, {}> {
 
     // Once the walls are ready, they're permanent. Never bother re-rendering!
     shouldComponentUpdate(): boolean {
